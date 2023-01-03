@@ -2,6 +2,7 @@ import {useEffect, useState} from "react"
 import axios from "axios"
 import { Button, Table } from 'react-bootstrap';
 import productService from "../services/product.services";
+import categoryService from "../services/categoryServices";
 import { Link } from "react-router-dom";
 
 function ProductList(){
@@ -28,7 +29,7 @@ function ProductList(){
         getAllProducts()
     }
 
-    console.log(products.data)
+    console.log(products)
     return(
 
         <div className="container">
@@ -42,6 +43,7 @@ function ProductList(){
                             <th>Name</th>
                             <th>Price</th>
                             <th>Description</th>
+                            <th>Category</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -53,6 +55,7 @@ function ProductList(){
                             <td>{elem.name}</td>
                             <td>{elem.price}</td>
                             <td>{elem.description}</td>
+                            <td>{elem.category.name}</td>
                             <td><Button onClick={()=>deleteProduct(elem._id)} variant="danger " className="btn-delete" >Supprimer</Button>
                             <Link to={`/product/edit/${elem._id}`} className="btn btn-success" >Editer</Link>
                             </td>
